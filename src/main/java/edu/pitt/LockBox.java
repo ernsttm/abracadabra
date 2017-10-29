@@ -44,6 +44,8 @@ public class LockBox
                 return new MockLock();
             case Servo:
                 return new SoleniodLock(configuration.getLockPin());
+            default:
+                return new MockLock();
         }
     }
 

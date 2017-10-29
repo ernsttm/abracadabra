@@ -8,7 +8,7 @@ public class SoleniodLockTests
     @Test
     public void SoleniodTest()
     {
-        SoleniodLock lock = new SoleniodLock();
+        SoleniodLock lock = new SoleniodLock(8);
 
         for (int i = 0; i < 5; i++)
         {
