@@ -43,7 +43,7 @@ public class LockBox
             case Mock:
                 return new MockLock();
             case Servo:
-                return new SoleniodLock(configuration.getLockPin())
+                return new SoleniodLock(configuration.getLockPin());
         }
     }
 
