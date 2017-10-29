@@ -17,6 +17,11 @@ public class LockConfiguration
         return lockType_;
     }
 
+    public int getLockPint()
+    {
+        return lockPin_;
+    }
+
     public List<TumblerConfiguration> getTumblerConfigurations()
     {
         return Arrays.asList(tumblerConfigurations_);
@@ -27,4 +32,7 @@ public class LockConfiguration
 
     @SerializedName("lockType")
     private LockType lockType_;
+
+    @SerializedName("lockPin")
+    private int lockPin_;
 }
