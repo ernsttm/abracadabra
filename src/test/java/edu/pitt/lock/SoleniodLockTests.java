@@ -9,7 +9,7 @@ public class SoleniodLockTests
     public void SoleniodTest()
     {
         SoleniodLock lock = new SoleniodLock();
-
+	
         for (int i = 0; i < 5; i++)
         {
             try
