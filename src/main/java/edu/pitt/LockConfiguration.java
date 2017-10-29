@@ -17,7 +17,7 @@ public class LockConfiguration
         return lockType_;
     }
 
-    public int getLockPint()
+    public int getLockPin()
     {
         return lockPin_;
     }

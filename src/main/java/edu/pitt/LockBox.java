@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import edu.pitt.lock.Lock;
 import edu.pitt.lock.MockLock;
+import edu.pitt.lock.SoleniodLock;
 import edu.pitt.tumbler.Tumbler;
 import edu.pitt.tumbler.TumblerConfiguration;
 import edu.pitt.tumbler.numpad.NumpadTumbler;
@@ -37,7 +38,13 @@ public class LockBox
 
     private static Lock createLock(LockConfiguration configuration) throws Exception
     {
-        return new MockLock();
+        switch(configuration.getLockType())
+        {
+            case Mock:
+                return new MockLock();
+            case Servo:
+                return new SoleniodLock(configuration.getLockPin())
+        }
     }
 
     private static Map<Integer, Tumbler> createTumblers(List<TumblerConfiguration> configurations) throws Exception

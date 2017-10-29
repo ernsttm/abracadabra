@@ -9,10 +9,10 @@ import com.pi4j.io.gpio.*;
  {
 	 final GpioPinDigitalOutput lockPin;
 
-	 public SoleniodLock()
+	 public SoleniodLock(int pinNumber)
 	 {
 		GpioController gpio = GpioFactory.getInstance();
-		lockPin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, "Soleniod", PinState.LOW);
+		lockPin = gpio.provisionDigitalOutputPin(RaspiPin.getPinByAddress(pinNumber), "Soleniod", PinState.LOW);
 		lockPin.setShutdownOptions(true, PinState.LOW);
 	 }
 	 
