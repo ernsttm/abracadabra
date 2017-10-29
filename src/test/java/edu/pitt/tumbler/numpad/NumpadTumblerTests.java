@@ -1,54 +1,54 @@
 package edu.pitt.tumbler.numpad;
 
-
 import com.google.gson.Gson;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.*;
+import static org.junit.Assert.*;
 
-class NumpadTumblerTests
+public class NumpadTumblerTests
 {
-    private static final Gson gson = new Gson();
-
     @Test
-    void BasicNumpadTest()
+    public void BasicNumpadTest()
     {
+        Gson test = new Gson();
         String configString = "{timeoutInSeconds: 5, keyPresses: [1]}";
-        NumpadTumblerConfiguration config = gson.fromJson(configString, NumpadTumblerConfiguration.class);
+        NumpadTumblerConfiguration config = test.fromJson(configString, NumpadTumblerConfiguration.class);
         NumpadTumbler tumbler = new NumpadTumbler(config);
 
         String messageString = "{tumblerId: 1, keyId: 1}";
-        NumpadTumblerMessage message = gson.fromJson(messageString, NumpadTumblerMessage.class);
+        NumpadTumblerMessage message = test.fromJson(messageString, NumpadTumblerMessage.class);
 
         assertTrue(tumbler.receiveTumblerMessage(message));
     }
 
     @Test
-    void TwoStepNumpad()
+    public void TwoStepNumpad()
     {
+        Gson test = new Gson();
         String configString = "{timeoutInSeconds: 5, keyPresses: [1, 2]}";
-        NumpadTumblerConfiguration config = gson.fromJson(configString, NumpadTumblerConfiguration.class);
+        NumpadTumblerConfiguration config = test.fromJson(configString, NumpadTumblerConfiguration.class);
         NumpadTumbler tumbler = new NumpadTumbler(config);
 
         String messageString = "{tumblerId: 1, keyId: 1}";
-        NumpadTumblerMessage message = gson.fromJson(messageString, NumpadTumblerMessage.class);
+        NumpadTumblerMessage message = test.fromJson(messageString, NumpadTumblerMessage.class);
         assertFalse(tumbler.receiveTumblerMessage(message));
         assertFalse(tumbler.isUnlocked());
 
         messageString = "{tumblerId: 1, keyId: 2}";
-        message = gson.fromJson(messageString, NumpadTumblerMessage.class);
+        message = test.fromJson(messageString, NumpadTumblerMessage.class);
         assertTrue(tumbler.receiveTumblerMessage(message));
         assertTrue(tumbler.isUnlocked());
     }
 
     @Test
-    void TwoStepSlightPause() throws Exception
+    public void TwoStepSlightPause() throws Exception
     {
+        Gson test = new Gson();
         String configString = "{timeoutInSeconds: 5, keyPresses: [1, 2]}";
-        NumpadTumblerConfiguration config = gson.fromJson(configString, NumpadTumblerConfiguration.class);
+        NumpadTumblerConfiguration config = test.fromJson(configString, NumpadTumblerConfiguration.class);
         NumpadTumbler tumbler = new NumpadTumbler(config);
 
         String messageString = "{tumblerId: 1, keyId: 1}";
-        NumpadTumblerMessage message = gson.fromJson(messageString, NumpadTumblerMessage.class);
+        NumpadTumblerMessage message = test.fromJson(messageString, NumpadTumblerMessage.class);
         assertFalse(tumbler.receiveTumblerMessage(message));
         assertFalse(tumbler.isUnlocked());
 
@@ -56,20 +56,21 @@ class NumpadTumblerTests
         Thread.sleep(1000);
 
         messageString = "{tumblerId: 1, keyId: 2}";
-        message = gson.fromJson(messageString, NumpadTumblerMessage.class);
+        message = test.fromJson(messageString, NumpadTumblerMessage.class);
         assertTrue(tumbler.receiveTumblerMessage(message));
         assertTrue(tumbler.isUnlocked());
     }
 
     @Test
-    void ResetByPause() throws Exception
+    public void ResetByPause() throws Exception
     {
+        Gson test = new Gson();
         String configString = "{timeoutInSeconds: 1, keyPresses: [1, 2]}";
-        NumpadTumblerConfiguration config = gson.fromJson(configString, NumpadTumblerConfiguration.class);
+        NumpadTumblerConfiguration config = test.fromJson(configString, NumpadTumblerConfiguration.class);
         NumpadTumbler tumbler = new NumpadTumbler(config);
 
         String messageString = "{tumblerId: 1, keyId: 1}";
-        NumpadTumblerMessage message = gson.fromJson(messageString, NumpadTumblerMessage.class);
+        NumpadTumblerMessage message = test.fromJson(messageString, NumpadTumblerMessage.class);
         assertFalse(tumbler.receiveTumblerMessage(message));
         assertFalse(tumbler.isUnlocked());
 
@@ -77,18 +78,18 @@ class NumpadTumblerTests
         Thread.sleep(2000);
 
         messageString = "{tumblerId: 1, keyId: 2}";
-        message = gson.fromJson(messageString, NumpadTumblerMessage.class);
+        message = test.fromJson(messageString, NumpadTumblerMessage.class);
         assertFalse(tumbler.receiveTumblerMessage(message));
         assertFalse(tumbler.isUnlocked());
 
         // Retry the unlock sequence and verify it succeeds
         messageString = "{tumblerId: 1, keyId: 1}";
-        message = gson.fromJson(messageString, NumpadTumblerMessage.class);
+        message = test.fromJson(messageString, NumpadTumblerMessage.class);
         assertFalse(tumbler.receiveTumblerMessage(message));
         assertFalse(tumbler.isUnlocked());
 
         messageString = "{tumblerId: 1, keyId: 2}";
-        message = gson.fromJson(messageString, NumpadTumblerMessage.class);
+        message = test.fromJson(messageString, NumpadTumblerMessage.class);
         assertTrue(tumbler.receiveTumblerMessage(message));
         assertTrue(tumbler.isUnlocked());
     }
