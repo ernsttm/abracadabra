@@ -7,19 +7,21 @@ import java.io.IOException;
 
 public class Adc {
 	public static SpiDevice spi = null;
+	private final int channelNumber_;
 
-	public Adc() throws IOException{
+	public Adc(int channelNumber) throws IOException{
+		channelNumber_ = channelNumber;
 
-		spi = SpiFactory.getInstance(SpiChannel.CS0,
+		spi = SpiFactory.getInstance(SpiChannel.getByNumber(channelNumber_),
 			SpiDevice.DEFAULT_SPI_SPEED, //1mhz
 			SpiDevice.DEFAULT_SPI_MODE); // mode = 0
 	}
 
 
-	public int read(int channel) throws IOException{
+	public int read() throws IOException{
 		byte data[] = new byte[]{
 			(byte)0b00000001,
-			(byte)(0b10000000 | ((channel & 7) << 4)),
+			(byte)(0b10000000 | ((channelNumber_ & 7) << 4)),
 			(byte)0b00000000,	
 	
 		};

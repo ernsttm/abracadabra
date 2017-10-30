@@ -7,6 +7,11 @@ import com.google.gson.annotations.SerializedName;
  */
 public abstract class TumblerMessage
 {
+    public TumblerMessage(int tumblerId)
+    {
+        tumblerId_ = tumblerId;
+    }
+
     /**
      * @return the id of the tumbler this message relates to.
      */
