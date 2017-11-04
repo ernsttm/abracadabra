@@ -84,6 +84,7 @@ public class LockBox
                     NumpadInputConfiguration inputConfig =
                             gson.fromJson(config.getInputConfig(), NumpadInputConfiguration.class);
                     NumpadInputManager numpad = new NumpadInputManager(inputConfig, manager);
+                    break;
                 default:
                     throw new IllegalArgumentException("Invalid Input Type: " + config.getInputType());
             }

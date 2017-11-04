@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * A base class for the various input configurations required by the system. Requires each input to specify the
  * Tumbler they relate to.
  */
-public abstract class InputConfiguration
+public class InputConfiguration
 {
     public InputType getInputType()
     {
