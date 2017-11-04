@@ -1,6 +1,8 @@
 package edu.pitt;
 
 import com.google.gson.annotations.SerializedName;
+import edu.pitt.input.InputConfiguration;
+import edu.pitt.input.NumpadInputConfiguration;
 import edu.pitt.lock.LockType;
 import edu.pitt.tumbler.TumblerConfiguration;
 
@@ -22,10 +24,18 @@ public class LockConfiguration
         return lockPin_;
     }
 
+    public List<InputConfiguration> getInputConfigurations()
+    {
+        return Arrays.asList(inputConfigurations_);
+    }
+
     public List<TumblerConfiguration> getTumblerConfigurations()
     {
         return Arrays.asList(tumblerConfigurations_);
     }
+
+    @SerializedName("inputs")
+    private InputConfiguration[] inputConfigurations_;
 
     @SerializedName("tumblers")
     private TumblerConfiguration[] tumblerConfigurations_;

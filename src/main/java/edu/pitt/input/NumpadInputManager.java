@@ -24,6 +24,7 @@ public class NumpadInputManager
     {
         lockManager_ = lockManager;
 
+        tumblerId_ = config.getTumbler();
         touchInputs_ = new ArrayList<>();
         for (int channel : config.getChannels())
         {
@@ -45,12 +46,13 @@ public class NumpadInputManager
             if (channelNumber == touchInputs_.get(channelIndex).getChannelNumber())
             {
                 int keyId = (channelIndex * 3) + touchZone.getKeyOffset();
-                NumpadTumblerMessage message = new NumpadTumblerMessage(keyId);
+                NumpadTumblerMessage message = new NumpadTumblerMessage(tumblerId_, keyId);
                 lockManager_.receiveMessage(message);
             }
         }
     }
 
+    private final int tumblerId_;
     private final LockManager lockManager_;
     private final List<TouchInput> touchInputs_;
 }

@@ -1,13 +1,14 @@
 package edu.pitt.input;
 
 import com.google.gson.annotations.SerializedName;
+import jdk.internal.util.xml.impl.Input;
 
 import java.util.List;
 
 /**
  * A simple configuration class for the NumpadInput manager
  */
-public class NumpadInputConfiguration
+public class NumpadInputConfiguration extends InputConfiguration
 {
     public List<Integer> getChannels()
     {

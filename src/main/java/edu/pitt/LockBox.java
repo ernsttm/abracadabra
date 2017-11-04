@@ -2,6 +2,9 @@ package edu.pitt;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
+import edu.pitt.input.InputConfiguration;
+import edu.pitt.input.NumpadInputConfiguration;
+import edu.pitt.input.NumpadInputManager;
 import edu.pitt.lock.Lock;
 import edu.pitt.lock.MockLock;
 import edu.pitt.lock.SoleniodLock;
@@ -34,6 +37,7 @@ public class LockBox
         Lock lock = createLock(lockConfig);
         Map<Integer, Tumbler> mappedTumblers = createTumblers(lockConfig.getTumblerConfigurations());
         LockManager lockManager = new LockManager(mappedTumblers, lock);
+        createInputs(lockConfig.getInputConfigurations(), lockManager);
     }
 
     private static Lock createLock(LockConfiguration configuration) throws Exception
@@ -51,7 +55,6 @@ public class LockBox
 
     private static Map<Integer, Tumbler> createTumblers(List<TumblerConfiguration> configurations) throws Exception
     {
-
         Map<Integer, Tumbler> mappedTumblers = new HashMap<>();
         for (TumblerConfiguration config : configurations)
         {
@@ -69,6 +72,22 @@ public class LockBox
         }
 
         return mappedTumblers;
+    }
+
+    private static void createInputs(List<InputConfiguration> configurations, LockManager manager) throws Exception
+    {
+        for (InputConfiguration config : configurations)
+        {
+            switch (config.getInputType())
+            {
+                case Touch:
+                    NumpadInputConfiguration inputConfig =
+                            gson.fromJson(config.getInputConfig(), NumpadInputConfiguration.class);
+                    NumpadInputManager numpad = new NumpadInputManager(inputConfig, manager);
+                default:
+                    throw new IllegalArgumentException("Invalid Input Type: " + config.getInputType());
+            }
+        }
     }
 
     private static LockConfiguration readLockFile(String lockFileName) throws Exception
