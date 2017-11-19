@@ -52,6 +52,7 @@ public class PinTumbler implements Tumbler
             if (unlocked_)
             {
                 timer_.cancel();
+                timer_ = new Timer();
                 timer_.schedule(new ResetTask(), timeoutInMs_);
             }
 
