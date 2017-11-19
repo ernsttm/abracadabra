@@ -75,7 +75,7 @@ public class PinTumbler implements Tumbler
     private int timeoutInMs_;
     private boolean unlocked_;
 
+    private Timer timer_;
+    
     private final Object tumblerLock_;
-
-    private final Timer timer_;
 }
