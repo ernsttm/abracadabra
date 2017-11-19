@@ -5,6 +5,9 @@ import com.google.gson.stream.JsonReader;
 import edu.pitt.input.InputConfiguration;
 import edu.pitt.input.NumpadInputConfiguration;
 import edu.pitt.input.NumpadInputManager;
+import edu.pitt.input.bluetooth.BluetoothInput;
+import edu.pitt.input.bluetooth.BluetoothInputConfiguration;
+import edu.pitt.input.bluetooth.BluetoothInputManager;
 import edu.pitt.lock.Lock;
 import edu.pitt.lock.MockLock;
 import edu.pitt.lock.SoleniodLock;
@@ -12,6 +15,8 @@ import edu.pitt.tumbler.Tumbler;
 import edu.pitt.tumbler.TumblerConfiguration;
 import edu.pitt.tumbler.numpad.NumpadTumbler;
 import edu.pitt.tumbler.numpad.NumpadTumblerConfiguration;
+import edu.pitt.tumbler.pin.PinTumbler;
+import edu.pitt.tumbler.pin.PinTumblerConfiguration;
 
 import java.io.FileReader;
 import java.util.HashMap;
@@ -60,6 +65,12 @@ public class LockBox
         {
             switch (config.getTumblerType())
             {
+                case Pin:
+                    PinTumblerConfiguration pinConfig =
+                            gson.fromJson(config.getTumblerConfig(), PinTumblerConfiguration.class);
+                    Tumbler pinTumbler = new PinTumbler(pinConfig);
+                    mappedTumblers.put(config.getTumblerId(), pinTumbler);
+                    break;
                 case NumPad:
                     NumpadTumblerConfiguration numConfig =
                             gson.fromJson(config.getTumblerConfig(), NumpadTumblerConfiguration.class);
@@ -80,6 +91,11 @@ public class LockBox
         {
             switch (config.getInputType())
             {
+                case Bluetooth:
+                    BluetoothInputConfiguration btConfig =
+                            gson.fromJson(config.getInputConfig(), BluetoothInputConfiguration.class);
+                    BluetoothInputManager bluetooth = new BluetoothInputManager(btConfig, manager);
+                    break;
                 case Touch:
                     NumpadInputConfiguration inputConfig =
                             gson.fromJson(config.getInputConfig(), NumpadInputConfiguration.class);
