@@ -8,11 +8,11 @@ public class LEDManager
 	{
 		GpioController gpio = GpioFactory.getInstance();
 		
-		redPin_ = gpio.provisionDigitalOutputPin(RaspiPin.getPinByAddress(greenPin), "Green", PinState.LOW);
-		redPin_.setShutDownOptions(true, PinState.LOW);
+		redPin_ = gpio.provisionDigitalOutputPin(RaspiPin.getPinByAddress(redPin), "Red", PinState.LOW);
+		redPin_.setShutdownOptions(true, PinState.LOW);
 		
-		greenPin_ = gpio.provisionDigitalOutputPin(RaspiPin.getPinByAddress(redPin), "Red", PinStage.LOW);
-		greenPin_.setShutDownOptions(true, PinState.LOW);
+		greenPin_ = gpio.provisionDigitalOutputPin(RaspiPin.getPinByAddress(greenPin), "Green", PinState.LOW);
+		greenPin_.setShutdownOptions(true, PinState.LOW);
 	}
 	
 	public void indicateLowPower()
@@ -25,11 +25,18 @@ public class LEDManager
 		Thread flashThread = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				greenPin_.high();
-				Thread.sleep(500);
-				greenPin_.low();
+        try
+        {
+				  greenPin_.high();
+  				Thread.sleep(500);
+	  			greenPin_.low();
+        }
+        catch(InterruptedException e)
+        {
+          System.out.println("Flash failed");
+        }
 			}
-		}
+		});
 		
 		flashThread.start();
 	}
@@ -39,15 +46,22 @@ public class LEDManager
 		Thread flashThread = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				greenPin_.high();
-				Thread.sleep(500);
-				greenPin_.low();
-				Thread.sleep(100);
-				greenPin_.high();
-				Thread.sleep(500);
-				greenPin_.low();
+        try
+        {
+	  			greenPin_.high();
+		  		Thread.sleep(500);
+			  	greenPin_.low();
+	  			Thread.sleep(100);
+	  			greenPin_.high();
+	  			Thread.sleep(500);
+		  		greenPin_.low();
+        }
+        catch (InterruptedException e)
+        {
+          System.out.println("Flash Failed");
+        }
 			}
-		}
+		});
 	}
 	
 	private final GpioPinDigitalOutput redPin_;
