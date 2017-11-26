@@ -8,6 +8,7 @@ import java.util.TimerTask;
 public class BatterySensor extends TimerTask
 {
 	public BatterySensor(int channelNumber, LEDManager led, Lock lock)
+		throws IOException
 	{
 		adc_ = new Adc(channelNumber);
 	
@@ -18,10 +19,17 @@ public class BatterySensor extends TimerTask
 	@Override
 	public void run()
 	{
-		if (adc_.read() < 542)
+		try 
 		{
-			led_.indicateLowPower();
-			lock_.unlock();
+			if (adc_.read() < 542)
+			{
+				led_.indicateLowPower();
+				lock_.unlock();
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("Failed to read battery sensor");
 		}
 	}
 	
