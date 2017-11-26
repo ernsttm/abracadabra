@@ -18,6 +18,11 @@ public class LockConfiguration
     {
         return lockType_;
     }
+	
+	public int getBatteryChannel()
+	{
+		return batteryChannel_;
+	}
 
     public int getLockPin()
     {
@@ -52,6 +57,9 @@ public class LockConfiguration
 
     @SerializedName("lockType")
     private LockType lockType_;
+	
+	@SerializedName("batteryChannel")
+	private int batteryChannel_;
 
     @SerializedName("lockPin")
     private int lockPin_;
