@@ -42,7 +42,7 @@ public class LockBox
         LockConfiguration lockConfig = readLockFile(lockFileName);
         Lock lock = createLock(lockConfig);
 		LEDManager led = new LEDManager(lockConfig.getGreenLEDPin(), lockConfig.getRedLEDPin());
-		BatterySensor sensor = new BatterySensor(lockConfig.getBatteryChannel, led, lock);
+		BatterySensor sensor = new BatterySensor(lockConfig.getBatteryChannel(), led, lock);
 		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(sensor, 0, 10);
         Map<Integer, Tumbler> mappedTumblers = createTumblers(lockConfig.getTumblerConfigurations());
