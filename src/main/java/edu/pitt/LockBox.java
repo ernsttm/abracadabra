@@ -40,6 +40,7 @@ public class LockBox
         String lockFileName = args[0];
         LockConfiguration lockConfig = readLockFile(lockFileName);
         Lock lock = createLock(lockConfig);
+		LEDManager led = new LEDManager(lockConfig.getGreenLEDPin(), lockConfig.getRedLEDPin());
         Map<Integer, Tumbler> mappedTumblers = createTumblers(lockConfig.getTumblerConfigurations());
         LockManager lockManager = new LockManager(mappedTumblers, lock);
         createInputs(lockConfig.getInputConfigurations(), lockManager);

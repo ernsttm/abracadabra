@@ -23,6 +23,16 @@ public class LockConfiguration
     {
         return lockPin_;
     }
+	
+	public int getRedLEDPin()
+	{
+		return redPin_;
+	}
+	
+	public int getGreenLEDPin()
+	{
+		return greenPin_;
+	}
 
     public List<InputConfiguration> getInputConfigurations()
     {
@@ -45,4 +55,10 @@ public class LockConfiguration
 
     @SerializedName("lockPin")
     private int lockPin_;
+	
+	@SerializedName("redPin")
+	private int redPin_;
+	
+	@SerializedName("greenPin")
+	private int greenPin_;
 }
