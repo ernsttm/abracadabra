@@ -1,6 +1,9 @@
 package edu.pitt;
 
 import edu.pitt.input.Adc;
+import edu.pitt.lock.Lock;
+
+import java.util.TimerTask;
 
 public class BatterySensor extends TimerTask
 {
