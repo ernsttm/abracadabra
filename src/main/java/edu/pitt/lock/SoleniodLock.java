@@ -14,7 +14,7 @@ import com.pi4j.io.gpio.*;
 		GpioController gpio = GpioFactory.getInstance();
 		lockPin = gpio.provisionDigitalOutputPin(RaspiPin.getPinByAddress(pinNumber), "Soleniod", PinState.LOW);
 		lockPin.setShutdownOptions(true, PinState.LOW);
-    lockPin.low();
+		lockPin.low();
 	 }
 	 
 	 @Override
@@ -23,7 +23,7 @@ import com.pi4j.io.gpio.*;
 		lockPin.low();
 		
 		// Add a new task to relock the lock 
-		Thread thread = new Thread(new Runnable
+		Thread thread = new Thread(new Runnable()
 		{
 			@Override
 			public void run()

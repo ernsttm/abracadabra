@@ -25,16 +25,16 @@ public class LEDManager
 		Thread flashThread = new Thread(new Runnable() {
 			@Override
 			public void run() {
-        try
-        {
-				  greenPin_.high();
-  				Thread.sleep(500);
-	  			greenPin_.low();
-        }
-        catch(InterruptedException e)
-        {
-          System.out.println("Flash failed");
-        }
+				try
+				{
+						  greenPin_.high();
+						Thread.sleep(500);
+						greenPin_.low();
+				}
+				catch(InterruptedException e)
+				{
+				  System.out.println("Flash failed");
+				}
 			}
 		});
 		
