@@ -20,13 +20,25 @@ import com.pi4j.io.gpio.*;
 	 @Override
 	 public void lock()
 	 {
-		 lockPin.low();
+		lockPin.low();
+		
+		// Add a new task to relock the lock 
+		Thread thread = new Thread(new Runnable
+		{
+			@Override
+			public void run()
+			{
+				Thread.sleep(5000);
+				unlock();
+			}
+		});
+		
+		thread.start();
 	 }
 	 
 	 @Override
 	 public void unlock()
 	 {
-     System.out.println("Unlocking");
-		 lockPin.high();
+		lockPin.high();
 	 }
  }
