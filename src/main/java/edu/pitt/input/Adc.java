@@ -12,7 +12,7 @@ public class Adc {
 	public Adc(int channelNumber) throws IOException{
 		channelNumber_ = channelNumber;
 
-		spi = SpiFactory.getInstance(SpiChannel.getByNumber(channelNumber_),
+		spi = SpiFactory.getInstance(SpiChannel.getByNumber(0),
 			SpiDevice.DEFAULT_SPI_SPEED, //1mhz
 			SpiDevice.DEFAULT_SPI_MODE); // mode = 0
 	}

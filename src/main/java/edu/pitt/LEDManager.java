@@ -27,9 +27,9 @@ public class LEDManager
 			public void run() {
 				try
 				{
-						  greenPin_.high();
-						Thread.sleep(500);
-						greenPin_.low();
+					greenPin_.high();
+					Thread.sleep(500);
+					greenPin_.low();
 				}
 				catch(InterruptedException e)
 				{
