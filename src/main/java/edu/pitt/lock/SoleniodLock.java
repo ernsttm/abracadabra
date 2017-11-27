@@ -14,6 +14,7 @@ import com.pi4j.io.gpio.*;
 		GpioController gpio = GpioFactory.getInstance();
 		lockPin = gpio.provisionDigitalOutputPin(RaspiPin.getPinByAddress(pinNumber), "Soleniod", PinState.LOW);
 		lockPin.setShutdownOptions(true, PinState.LOW);
+    lockPin.low();
 	 }
 	 
 	 @Override
@@ -25,6 +26,7 @@ import com.pi4j.io.gpio.*;
 	 @Override
 	 public void unlock()
 	 {
+     System.out.println("Unlocking");
 		 lockPin.high();
 	 }
  }

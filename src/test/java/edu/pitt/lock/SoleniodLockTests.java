@@ -14,9 +14,9 @@ public class SoleniodLockTests
         {
             try
             {
-                lock.lock();
-                Thread.sleep(1000);
                 lock.unlock();
+                Thread.sleep(1000);
+                lock.lock();
                 Thread.sleep(1000);
             }
             catch (Exception e)

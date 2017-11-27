@@ -27,7 +27,7 @@ public class InputConfiguration
     @SerializedName("inputType")
     private InputType inputType_;
 
-    @SerializedName("tumbler")
+    @SerializedName("tumblerId")
     private int tumblerId_;
 
     @SerializedName("config")

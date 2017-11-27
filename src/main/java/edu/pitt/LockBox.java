@@ -42,11 +42,11 @@ public class LockBox
         LockConfiguration lockConfig = readLockFile(lockFileName);
         Lock lock = createLock(lockConfig);
 		LEDManager led = new LEDManager(lockConfig.getGreenLEDPin(), lockConfig.getRedLEDPin());
-		BatterySensor sensor = new BatterySensor(lockConfig.getBatteryChannel(), led, lock);
-		Timer timer = new Timer();
-		timer.scheduleAtFixedRate(sensor, 0, 10);
+//		BatterySensor sensor = new BatterySensor(lockConfig.getBatteryChannel(), led, lock);
+//		Timer timer = new Timer();
+//		timer.scheduleAtFixedRate(sensor, 0, 10);
         Map<Integer, Tumbler> mappedTumblers = createTumblers(lockConfig.getTumblerConfigurations());
-        LockManager lockManager = new LockManager(mappedTumblers, lock);
+        LockManager lockManager = new LockManager(mappedTumblers, led, lock);
         createInputs(lockConfig.getInputConfigurations(), lockManager);
     }
 
@@ -71,6 +71,7 @@ public class LockBox
             switch (config.getTumblerType())
             {
                 case Pin:
+                    System.out.println("Configured Tumbler Id : " + config.getTumblerId());
                     PinTumblerConfiguration pinConfig =
                             gson.fromJson(config.getTumblerConfig(), PinTumblerConfiguration.class);
                     Tumbler pinTumbler = new PinTumbler(pinConfig);
@@ -99,6 +100,7 @@ public class LockBox
                 case Bluetooth:
                     BluetoothInputConfiguration btConfig =
                             gson.fromJson(config.getInputConfig(), BluetoothInputConfiguration.class);
+                    System.out.println("Config bt : " + config.getTumbler());
                     BluetoothInputManager bluetooth = new BluetoothInputManager(btConfig, manager);
                     break;
                 case Touch:

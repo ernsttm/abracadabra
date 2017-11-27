@@ -13,14 +13,17 @@ import java.util.Map;
  */
 public class LockManager
 {
-    public LockManager(Map<Integer, Tumbler> mappedTumblers, Lock lock)
+    public LockManager(Map<Integer, Tumbler> mappedTumblers, LEDManager led, Lock lock)
     {
+        led_ = led;
         lock_ = lock;
         mappedTumblers_ = mappedTumblers;
     }
 
     public void receiveMessage(TumblerMessage message)
     {
+        led_.indicateInput();
+
         if (!mappedTumblers_.containsKey(message.getTumblerId()))
         {
             System.out.println("The lock doesn't contain the given tumbler : " + message.getTumblerId());
@@ -28,6 +31,7 @@ public class LockManager
         }
 
         Tumbler tumbler = mappedTumblers_.get(message.getTumblerId());
+        System.out.println("Tumbler ID : " + message.getTumblerId());
         if (tumbler.receiveTumblerMessage(message))
         {
             testAndUnlock();
@@ -46,9 +50,11 @@ public class LockManager
             }
         }
 
+        led_.indicateUnlock();
         lock_.unlock();
     }
 
     private final Lock lock_;
+    private final LEDManager led_;
     private final Map<Integer, Tumbler> mappedTumblers_;
 }
