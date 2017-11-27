@@ -10,9 +10,9 @@ import java.io.IOException;
  */
 public class BluetoothInputManager
 {
-    public BluetoothInputManager(BluetoothInputConfiguration config, LockManager lockManager) throws IOException
+    public BluetoothInputManager(int tumblerId, BluetoothInputConfiguration config, LockManager lockManager) throws IOException
     {
-        tumblerId_ = config.getTumbler();
+        tumblerId_ = tumblerId;
         System.out.println("Configured Tumbler ID : " + tumblerId_ + " : " + config.getTumbler());
         lockManager_ = lockManager;
 

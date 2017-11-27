@@ -100,13 +100,12 @@ public class LockBox
                 case Bluetooth:
                     BluetoothInputConfiguration btConfig =
                             gson.fromJson(config.getInputConfig(), BluetoothInputConfiguration.class);
-                    System.out.println("Config bt : " + config.getTumbler());
-                    BluetoothInputManager bluetooth = new BluetoothInputManager(btConfig, manager);
+                    BluetoothInputManager bluetooth = new BluetoothInputManager(config.getTumbler(), btConfig, manager);
                     break;
                 case Touch:
                     NumpadInputConfiguration inputConfig =
                             gson.fromJson(config.getInputConfig(), NumpadInputConfiguration.class);
-                    NumpadInputManager numpad = new NumpadInputManager(inputConfig, manager);
+                    NumpadInputManager numpad = new NumpadInputManager(config.getTumbler(), inputConfig, manager);
                     break;
                 default:
                     throw new IllegalArgumentException("Invalid Input Type: " + config.getInputType());

@@ -20,11 +20,11 @@ public class NumpadInputManager
      * @param lockManager the lock manager to forward "interesting" messages to.
      * @throws IOException if unable to create the configured SPI touch inputs.
      */
-    public NumpadInputManager(NumpadInputConfiguration config, LockManager lockManager) throws IOException
+    public NumpadInputManager(int tumblerId, NumpadInputConfiguration config, LockManager lockManager) throws IOException
     {
         lockManager_ = lockManager;
 
-        tumblerId_ = config.getTumbler();
+        tumblerId_ = tumblerId;
         touchInputs_ = new ArrayList<>();
         for (int channel : config.getChannels())
         {
