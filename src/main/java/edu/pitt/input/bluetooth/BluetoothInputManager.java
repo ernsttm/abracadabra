@@ -13,7 +13,6 @@ public class BluetoothInputManager
     public BluetoothInputManager(int tumblerId, BluetoothInputConfiguration config, LockManager lockManager) throws IOException
     {
         tumblerId_ = tumblerId;
-        System.out.println("Configured Tumbler ID : " + tumblerId_ + " : " + config.getTumbler());
         lockManager_ = lockManager;
 
         input_ = new BluetoothInput(config.getSerialChannel(), this);

@@ -71,7 +71,6 @@ public class LockBox
             switch (config.getTumblerType())
             {
                 case Pin:
-                    System.out.println("Configured Tumbler Id : " + config.getTumblerId());
                     PinTumblerConfiguration pinConfig =
                             gson.fromJson(config.getTumblerConfig(), PinTumblerConfiguration.class);
                     Tumbler pinTumbler = new PinTumbler(pinConfig);

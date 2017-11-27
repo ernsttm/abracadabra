@@ -31,7 +31,6 @@ public class LockManager
         }
 
         Tumbler tumbler = mappedTumblers_.get(message.getTumblerId());
-        System.out.println("Tumbler ID : " + message.getTumblerId());
         if (tumbler.receiveTumblerMessage(message))
         {
             testAndUnlock();
